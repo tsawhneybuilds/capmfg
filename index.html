@@ -6,8 +6,16 @@
     <title>capmfg: Thesis Walkthrough</title>
     <meta
       name="description"
-      content="A crisp walkthrough of the thesis hypotheses, tests, current findings, and evidence boundary."
+      content="Real-data tests of manufacturing scale-up, imported inputs, supplier breadth, and persistence in India's Annual Survey of Industries."
     >
+    <link rel="canonical" href="https://tsawhneybuilds.github.io/capmfg/">
+    <meta property="og:title" content="capmfg: Thesis Walkthrough">
+    <meta
+      property="og:description"
+      content="What the thesis tests, what the ASI data currently show, and what remains unproved."
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tsawhneybuilds.github.io/capmfg/">
     <style>
       :root {
         --ink: #1f2328;
@@ -15,9 +23,8 @@
         --rule: #d9dee5;
         --paper: #fbfaf7;
         --panel: #ffffff;
-        --blue: #2455a4;
         --red: #a6403b;
-        --amber: #a46b24;
+        --amber: #75470c;
         --green: #2d6a4f;
       }
 
@@ -171,7 +178,7 @@
       }
 
       .status {
-        border-radius: 999px;
+        border-radius: 2px;
         display: inline-block;
         font-size: 0.8rem;
         font-weight: 700;
@@ -195,30 +202,124 @@
         color: var(--green);
       }
 
+      .result-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .result-card {
+        background: var(--panel);
+        border: 1px solid var(--rule);
+        border-top: 4px solid var(--ink);
+        padding: 18px;
+      }
+
+      .result-card.supported {
+        border-top-color: var(--green);
+      }
+
+      .result-card.unsupported {
+        border-top-color: var(--red);
+      }
+
+      .result-card.diagnostic {
+        border-top-color: var(--amber);
+      }
+
+      .result-card h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.25rem;
+        margin: 8px 0 10px;
+      }
+
+      .result-card p {
+        margin: 0;
+      }
+
+      .result-card p + p {
+        margin-top: 10px;
+      }
+
+      .test-stat {
+        display: block;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1;
+        margin: 10px 0 6px;
+      }
+
+      .method-note {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .replication {
+        align-items: baseline;
+        border-top: 1px solid var(--rule);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 18px;
+        margin-top: 18px;
+        padding-top: 14px;
+      }
+
+      a {
+        color: #164f92;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 3px;
+      }
+
+      a:focus-visible {
+        outline: 3px solid var(--amber);
+        outline-offset: 3px;
+      }
+
+      .summary-grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .summary-item {
+        border-top: 4px solid var(--ink);
+        padding-top: 12px;
+      }
+
+      .summary-item strong {
+        display: block;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.25rem;
+        margin-bottom: 5px;
+      }
+
+      .summary-item.supported {
+        border-top-color: var(--green);
+      }
+
+      .summary-item.unsupported {
+        border-top-color: var(--red);
+      }
+
+      .summary-item.open {
+        border-top-color: var(--amber);
+      }
+
+      .sr-only {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      }
+
       .evidence {
         display: grid;
         gap: 16px;
         grid-template-columns: 1fr 1fr;
-      }
-
-      .bar-row {
-        align-items: center;
-        display: grid;
-        gap: 12px;
-        grid-template-columns: 150px minmax(0, 1fr) 92px;
-        margin: 10px 0;
-      }
-
-      .bar {
-        background: #edf0f4;
-        height: 12px;
-        overflow: hidden;
-      }
-
-      .bar span {
-        background: var(--blue);
-        display: block;
-        height: 100%;
       }
 
       .note {
@@ -240,17 +341,28 @@
         .hero,
         .metrics,
         .grid,
-        .evidence {
+        .evidence,
+        .result-grid,
+        .summary-grid {
           grid-template-columns: 1fr;
         }
 
-        .bar-row {
-          grid-template-columns: 1fr;
+        td {
+          display: grid;
+          grid-template-columns: minmax(92px, 0.32fr) minmax(0, 1fr);
+          gap: 10px;
+        }
+
+        td::before {
+          color: var(--muted);
+          content: attr(data-label);
+          font-size: 0.72rem;
+          font-weight: 700;
+          text-transform: uppercase;
         }
 
         th,
         td {
-          display: block;
           padding-left: 0;
           padding-right: 0;
         }
@@ -261,8 +373,14 @@
           padding: 10px 0;
         }
 
-        th {
-          display: none;
+        thead {
+          clip: rect(0 0 0 0);
+          clip-path: inset(50%);
+          height: 1px;
+          overflow: hidden;
+          position: absolute;
+          white-space: nowrap;
+          width: 1px;
         }
       }
     </style>
@@ -274,40 +392,172 @@
           <div class="kicker">Thesis walkthrough</div>
           <h1>Credit can build factories, or merely inflate balance sheets.</h1>
           <p class="deck">
-            The thesis asks whether production-oriented finance helps regions
-            build the supplier networks needed for durable manufacturing growth,
-            and whether switching to foreign sourcing can leave domestic
-            supplier capacity harder to rebuild. The current work is a research
-            design plus an auditable India manufacturing pipeline. It is not yet
-            a finished empirical result.
+            The thesis asks whether production-oriented finance builds the supplier
+            networks needed for durable manufacturing growth. New tests on real
+            Indian plant data find a robust age-size gradient, no robust evidence
+            that shifts toward imported inputs reduce later indigenous-input
+            breadth, and persistent plant-level input losses. These are descriptive
+            findings, not the thesis's final causal estimates.
           </p>
         </div>
         <aside class="verdict">
           <strong>The clean answer</strong>
-          You proved the machinery can be built and audited. You have not yet
-          proved the causal hypotheses. The displayed dashboard numbers are
-          synthetic placeholders, not claims about Indian states.
+          One hypothesis receives descriptive support: older plants are larger.
+          The tested import-erosion relationship does not. No causal claim about
+          bank credit, supplier destruction, or regional hysteresis is yet proved.
         </aside>
       </div>
 
       <div class="metrics" aria-label="Project status metrics">
         <div class="metric">
-          <b>1,068,135</b>
-          <span>ASI plant-year rows inventoried</span>
+          <b>624,067</b>
+          <span>plant-years in the scale-up test</span>
         </div>
         <div class="metric">
-          <b>209,249</b>
-          <span>IDs observed in at least two years</span>
+          <b>+17.0%</b>
+          <span>predicted employment difference, age 5 to 20</span>
         </div>
         <div class="metric">
-          <b>1998-2017</b>
-          <span>ASI panel-block coverage found</span>
+          <b>No robust loss</b>
+          <span>after plants shift toward imported inputs</span>
         </div>
         <div class="metric">
-          <b>0</b>
-          <span>release-ready causal findings so far</span>
+          <b>67.0%</b>
+          <span>large breadth losses unrecovered after two years</span>
         </div>
       </div>
+
+      <section aria-labelledby="real-results-heading">
+        <h2 id="real-results-heading">What The Real Data Say</h2>
+        <div class="result-grid">
+          <article class="result-card supported">
+            <span class="status done">Descriptive support</span>
+            <h3>Older plants are larger</h3>
+            <span class="test-stat">0.126 elasticity</span>
+            <p>
+              Within the same two-digit industry and year, older plants have more
+              employment. The estimate implies a 17.0% age-size difference between
+              age 20 and age 5.
+            </p>
+            <p class="method-note">
+              N = 624,067 plant-years; 217,711 identifier clusters; clustered SE =
+              0.0043; p &lt; 0.001. The estimate remains 0.125 when restricted to
+              repeated IDs with a stable reported production-start year.
+            </p>
+          </article>
+
+          <article class="result-card unsupported">
+            <span class="status blocked">Not supported</span>
+            <h3>Import shifts do not predict supplier erosion</h3>
+            <span class="test-stat">No robust negative association</span>
+            <p>
+              A ten-point rise in directly imported input share predicts 0.012
+              additional indigenous input items next year, the opposite of erosion
+              and economically tiny. The relationship becomes statistically null
+              after trimming the largest 1% of import-share changes.
+            </p>
+            <p class="method-note">
+              First differences with two-digit-industry-by-year effects. N =
+              247,096; 60,564 clusters. Trimmed estimate = 0.055 per full-share
+              change, p = 0.344. Importer entry estimate = 0.002 items, p = 0.912.
+            </p>
+          </article>
+
+          <article class="result-card diagnostic">
+            <span class="status open">Diagnostic</span>
+            <h3>Input-breadth losses often persist</h3>
+            <span class="test-stat">67.0% unrecovered</span>
+            <p>
+              Among 12,059 plant episodes losing at least two major indigenous
+              input codes, two-thirds had not regained the prior breadth within two
+              subsequent observed years.
+            </p>
+            <p class="method-note">
+              The unrecovered share ranges from 57.9% to 71.5% when the loss
+              threshold moves from one to three items. This is a plant-level
+              persistence diagnostic, not a regional hysteresis estimate.
+            </p>
+          </article>
+
+          <article class="result-card">
+            <span class="status open">Panel warning</span>
+            <h3>Entry and exit are still blocked</h3>
+            <span class="test-stat">74.6% contain gaps</span>
+            <p>
+              Two-digit industry is stable across 96.3% of consecutive observations
+              within a coding regime, but most repeated IDs disappear and later
+              return. Only 38.1% report a perfectly stable production-start year.
+            </p>
+            <p class="method-note">
+              The evidence supports panel feasibility, not clean births or deaths.
+              Sampling rotation, temporary absence, and identifier repair remain
+              unresolved.
+            </p>
+          </article>
+        </div>
+        <div class="replication" aria-label="Replication files">
+          <strong>Replication:</strong>
+          <a href="analysis/results.json">Aggregate results</a>
+          <a href="analysis/run_real_data_tests.py">Analysis script</a>
+          <a href="analysis/README.md">Run notes</a>
+        </div>
+      </section>
+
+      <section>
+        <h2>How The Tests Work</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>Scale-up</h3>
+            <p>
+              Regress log employment on log one plus plant age, absorbing
+              two-digit-industry-by-year effects and clustering standard errors by
+              plant identifier. Re-estimate on stable-start-year IDs and after
+              trimming the top and bottom 1% of employment.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Foreign sourcing</h3>
+            <p>
+              Measure directly imported share from ASI Block I and indigenous input
+              breadth from major Block H items. In first differences, ask whether an
+              import-share change predicts the following year's breadth change.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Persistence</h3>
+            <p>
+              Identify losses of one, two, or three major indigenous input codes and
+              calculate whether the plant regains its pre-loss breadth within one or
+              two subsequent consecutive observations.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Data boundary</h3>
+            <p>
+              Use 100 ASI source files from Blocks A, B, E, H, and I. Exclude 42
+              duplicated identifier-years and inconsistent aggregate totals. Keep
+              comparison windows inside the same input-schedule regime. Do not use
+              unvalidated survey weights or export plant identifiers.
+            </p>
+          </article>
+          <article class="card">
+            <h3>What fixed effects remove</h3>
+            <p>
+              Industry-year effects absorb shocks common to plants in the same broad
+              industry and year. First differences remove stable plant attributes in
+              the import test.
+            </p>
+          </article>
+          <article class="card">
+            <h3>What they do not remove</h3>
+            <p>
+              Import choices, survival, sampling, temporary absence, and reporting
+              changes remain endogenous. The estimates therefore describe patterns;
+              they do not identify policy effects.
+            </p>
+          </article>
+        </div>
+      </section>
 
       <section>
         <h2>What Work Was Done</h2>
@@ -363,43 +613,46 @@
       <section>
         <h2>Hypotheses, Tests, Findings</h2>
         <table>
+          <caption class="sr-only">
+            Current tests and evidence status for each thesis hypothesis
+          </caption>
           <thead>
             <tr>
-              <th>Hypothesis</th>
-              <th>How to test it</th>
-              <th>Current read</th>
+              <th scope="col">Hypothesis</th>
+              <th scope="col">How it was tested</th>
+              <th scope="col">Current read</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Production-oriented local banks help supplier ecosystems grow when demand rises.</td>
-              <td>Interact county supplier-demand exposure with local production-bank exposure from deposits and C&amp;I lending shares.</td>
-              <td><span class="status open">Open</span> Designed, not yet estimated on validated real data.</td>
+              <td data-label="Hypothesis">Production-oriented local banks help supplier ecosystems grow when demand rises.</td>
+              <td data-label="Test">Requires county supplier-demand exposure interacted with local production-bank exposure from deposits and C&amp;I lending.</td>
+              <td data-label="Current read"><span class="status open">Untested</span> The current files contain neither bank exposure nor the demand shock.</td>
             </tr>
             <tr>
-              <td>Non-production credit is weaker for manufacturing capacity.</td>
-              <td>Compare production-bank exposure with real-estate, consumer, securities, and nonbank-finance credit exposure.</td>
-              <td><span class="status open">Open</span> Not yet proved or disproved.</td>
+              <td data-label="Hypothesis">Non-production credit is weaker for manufacturing capacity.</td>
+              <td data-label="Test">Requires comparable production, real-estate, consumer, securities, and nonbank credit measures.</td>
+              <td data-label="Current read"><span class="status open">Untested</span> No credit panel is present.</td>
             </tr>
             <tr>
-              <td>Supplier-network dependence matters.</td>
-              <td>Measure detailed processed-input breadth from input-output tables and test whether demand shocks matter more in network-dependent industries.</td>
-              <td><span class="status open">Open</span> Measurement plan exists; causal evidence is pending.</td>
+              <td data-label="Hypothesis">Supplier-network dependence matters.</td>
+              <td data-label="Test">Measured each plant's breadth of major indigenous ASI input codes; the industry demand-shock interaction remains unavailable.</td>
+              <td data-label="Current read"><span class="status open">Partly measured</span> Input breadth is observable, but the network-demand hypothesis is not yet tested.</td>
             </tr>
             <tr>
-              <td>Foreign sourcing can erode domestic supplier capacity.</td>
-              <td>Build foreign-sourcing exposure and test linked upstream establishments, employment, payroll, births, deaths, and diversity.</td>
-              <td><span class="status open">Open</span> No confirmed erosion finding yet.</td>
+              <td data-label="Hypothesis">Foreign sourcing can erode domestic supplier capacity.</td>
+              <td data-label="Test">Regressed next-year change in indigenous-input breadth on the plant's prior change in directly imported-input share, using first differences and industry-year effects.</td>
+              <td data-label="Current read"><span class="status blocked">Not supported</span> No robust negative relationship; importer entry is also null. This does not establish a causal zero.</td>
             </tr>
             <tr>
-              <td>Lost supplier capacity creates hysteresis.</td>
-              <td>Test whether recovery is slower where the old supplier base deteriorated, and whether production credit weakens that persistence.</td>
-              <td><span class="status open">Open</span> This remains the central thesis test.</td>
+              <td data-label="Hypothesis">Lost supplier capacity creates hysteresis.</td>
+              <td data-label="Test">Tracked recovery after plant-level losses of one, two, or three major indigenous input codes.</td>
+              <td data-label="Current read"><span class="status open">Proxy only</span> Losses persist, but regional supplier capacity and the causal role of credit remain untested.</td>
             </tr>
             <tr>
-              <td>Indian manufacturing gaps reflect selection, scale-up, catch-up, and formal-informal reallocation.</td>
-              <td>Use ASI plant data, productivity decomposition, state profiles, and eventually NSS/ASUSE and benchmark comparisons.</td>
-              <td><span class="status blocked">Blocked</span> The pipeline exists, but state-level claims are not release-ready.</td>
+              <td data-label="Hypothesis">Indian manufacturing gaps reflect selection, scale-up, catch-up, and formal-informal reallocation.</td>
+              <td data-label="Test">Estimated the age-size gradient within industry-year cells. Entry, exit, productivity catch-up, and formal-informal reallocation need additional validated inputs.</td>
+              <td data-label="Current read"><span class="status done">Partial support</span> Scale-up has descriptive support; the other mechanisms remain blocked.</td>
             </tr>
           </tbody>
         </table>
@@ -411,50 +664,54 @@
           <article class="card">
             <h3>Positive finding</h3>
             <p>
-              The ASI source base is large enough to make a plant-year panel
-              plausible. Repeated IDs are common enough to justify linkage work,
-              and the code can produce auditable synthetic dashboard outputs.
+              The age-size gradient is positive, precisely estimated, and stable
+              after restricting the sample to repeated identifiers with a consistent
+              reported production-start year and after trimming employment outliers.
             </p>
           </article>
           <article class="card">
-            <h3>Negative finding</h3>
+            <h3>Null and adverse evidence</h3>
             <p>
-              The existing evidence is not yet strong enough to classify states,
-              estimate entry and exit, claim productivity effects, or say that
-              foreign sourcing eroded supplier capacity.
+              Import-share increases do not robustly predict a contraction in later
+              indigenous-input breadth. Identifier gaps and unstable start years
+              still prevent credible entry, exit, and regional causal estimates.
             </p>
           </article>
         </div>
         <div class="note">
-          The most important result is discipline: the project currently supports
-          a thesis-worthy research question and a reproducible pipeline, not a
-          polished empirical conclusion.
+          The evidence has moved beyond a synthetic prototype, but only to
+          provisional descriptive findings. The thesis's bank-credit mechanism and
+          regional supplier-hysteresis claim still require a separate causal design.
         </div>
       </section>
 
       <section>
-        <h2>What Is Proved, Disproved, Open</h2>
-        <div class="bar-row">
-          <strong>Proved</strong>
-          <div class="bar" aria-hidden="true"><span style="width: 72%"></span></div>
-          <span>Pipeline viability</span>
-        </div>
-        <div class="bar-row">
-          <strong>Disproved</strong>
-          <div class="bar" aria-hidden="true"><span style="width: 42%; background: var(--red)"></span></div>
-          <span>Ready-to-cite claims</span>
-        </div>
-        <div class="bar-row">
-          <strong>Open</strong>
-          <div class="bar" aria-hidden="true"><span style="width: 88%; background: var(--amber)"></span></div>
-          <span>Main causal tests</span>
+        <h2>What Is Supported, Not Supported, Open</h2>
+        <div class="summary-grid">
+          <div class="summary-item supported">
+            <strong>Descriptively supported</strong>
+            Older plants are larger within industry-year cells. This is robust to
+            the main age and employment data-quality restrictions.
+          </div>
+          <div class="summary-item unsupported">
+            <strong>Not supported here</strong>
+            Import shifts do not robustly predict a later loss of major indigenous
+            input breadth. This is not proof that the true causal effect is zero.
+          </div>
+          <div class="summary-item open">
+            <strong>Still open</strong>
+            Production credit, non-production credit, regional supplier erosion,
+            regional hysteresis, entry and exit, catch-up, and formal-informal
+            reallocation.
+          </div>
         </div>
       </section>
 
       <footer>
-        Prepared from the local thesis proposal, ASI pipeline reports, and
-        Streamlit dashboard prototype. Current evidence status: synthetic
-        dashboard data; real empirical claims pending validation.
+        Updated 21 July 2026. Real-data results use ASI blocks A, B, E, H, and I
+        for 1998-2017. Estimates are unweighted because candidate survey weights
+        remain unvalidated. No plant identifiers or plant-level records are
+        published. Dashboard-only state numbers remain synthetic placeholders.
       </footer>
     </main>
   </body>

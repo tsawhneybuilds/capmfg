@@ -1,0 +1,223 @@
+{
+  "generated_at_utc": "2026-07-21T05:14:09.450990+00:00",
+  "data": {
+    "source": "Annual Survey of Industries panel blocks A, B, E, H, and I",
+    "years": [
+      1998,
+      2017
+    ],
+    "unit": "plant-year",
+    "status": "provisional real-data descriptive analysis"
+  },
+  "evidence_boundary": {
+    "causal_claims_supported": false,
+    "untestable_with_current_files": [
+      "Production-oriented local bank credit builds regional supplier ecosystems",
+      "Non-production credit is weaker than production credit",
+      "Foreign sourcing causally destroys regional domestic supplier capacity",
+      "Regional supplier loss creates manufacturing hysteresis",
+      "Formal-informal reallocation explains state manufacturing gaps"
+    ]
+  },
+  "tests": {
+    "panel_persistence": {
+      "plant_year_rows": 1068135,
+      "analysis_rows_after_duplicate_exclusion": 1068093,
+      "unique_ids": 324509,
+      "ids_two_plus": 209246,
+      "ids_with_gap_among_repeated": 156039,
+      "gap_share_among_repeated": 0.7457203482981754,
+      "ids_with_repeated_valid_initial_year": 163449,
+      "stable_initial_year_share": 0.3807732075448611,
+      "duplicate_id_year_rows": 42,
+      "consecutive_same_regime_pairs": 442662,
+      "exact_industry_stability_rate": 0.8007847974300933,
+      "two_digit_industry_stability_rate": 0.9632993118903362,
+      "interpretation": "Repeated IDs and high within-code-regime industry stability support panel feasibility, but gaps and duplicate ID-years prevent validated entry/exit claims."
+    },
+    "scale_up": {
+      "hypothesis": "Older plants are larger, consistent with scale-up over the life cycle.",
+      "estimand": "Within industry-year elasticity of employment with respect to one plus plant age.",
+      "model": {
+        "estimate": 0.12555210360760521,
+        "std_error": 0.004325128336399179,
+        "t_stat": 29.028526749366183,
+        "p_value": 6.491680324793505e-185,
+        "ci_low": 0.11707496071084564,
+        "ci_high": 0.1340292465043648,
+        "observations": 624067,
+        "clusters": 217711,
+        "fixed_effect_cells": 737
+      },
+      "stable_initial_year_model": {
+        "estimate": 0.12460905471625901,
+        "std_error": 0.00806818848462635,
+        "t_stat": 15.44448979516247,
+        "p_value": 1.069687881544046e-53,
+        "ci_low": 0.10879534297031539,
+        "ci_high": 0.14042276646220261,
+        "observations": 209369,
+        "clusters": 54239,
+        "fixed_effect_cells": 688
+      },
+      "employment_trimmed_1_99pct_model": {
+        "estimate": 0.0974837421611609,
+        "std_error": 0.004029354456911837,
+        "t_stat": 24.193389587242724,
+        "p_value": 3.8754797842775775e-129,
+        "ci_low": 0.08958630855340273,
+        "ci_high": 0.10538117576891907,
+        "observations": 617827,
+        "clusters": 217289,
+        "fixed_effect_cells": 736
+      },
+      "predicted_employment_difference_age_5_to_20": 0.1703314812800938,
+      "age_groups": [
+        {
+          "age_group": "0-5",
+          "observations": 148942,
+          "median_employment": 23.0,
+          "geometric_mean_employment": 21.884058052352607
+        },
+        {
+          "age_group": "6-10",
+          "observations": 117089,
+          "median_employment": 26.0,
+          "geometric_mean_employment": 26.482291493858643
+        },
+        {
+          "age_group": "11-20",
+          "observations": 167404,
+          "median_employment": 26.0,
+          "geometric_mean_employment": 27.356170346440198
+        },
+        {
+          "age_group": "21+",
+          "observations": 190677,
+          "median_employment": 28.0,
+          "geometric_mean_employment": 32.388615147421966
+        }
+      ],
+      "result": "descriptive_support",
+      "interpretation": "A positive coefficient supports an age-size gradient, not causal learning or survival effects; selective exit and cohort composition remain confounders."
+    },
+    "foreign_sourcing": {
+      "hypothesis": "A shift toward directly imported inputs predicts a later contraction in the breadth of major indigenous inputs.",
+      "estimand": "Change in next-year indigenous-input breadth associated with a within-plant change in imported-input share, net of two-digit-industry-by-year effects and restricted to the same ASI input-schedule regime.",
+      "model": {
+        "estimate": 0.12176588123661362,
+        "std_error": 0.03705753375682863,
+        "t_stat": 3.2858603606932073,
+        "p_value": 0.0010172916200438884,
+        "ci_low": 0.049132998133905814,
+        "ci_high": 0.19439876433932143,
+        "observations": 247096,
+        "clusters": 60564,
+        "fixed_effect_cells": 507
+      },
+      "trimmed_99pct_model": {
+        "estimate": 0.055025892449019176,
+        "std_error": 0.05809319785182033,
+        "t_stat": 0.9472002658448068,
+        "p_value": 0.3435405314236726,
+        "ci_low": -0.05883696604882975,
+        "ci_high": 0.16888875094686812,
+        "observations": 244624,
+        "clusters": 60368,
+        "fixed_effect_cells": 507
+      },
+      "trimmed_95pct_model": {
+        "estimate": 0.1683675240057705,
+        "std_error": 0.11810751751090506,
+        "t_stat": 1.425544517013702,
+        "p_value": 0.154005090956463,
+        "ci_low": -0.0631236510757893,
+        "ci_high": 0.3998586990873303,
+        "observations": 234741,
+        "clusters": 59686,
+        "fixed_effect_cells": 507
+      },
+      "nic_2008_period_model": {
+        "estimate": 0.11354810171309253,
+        "std_error": 0.04390145858779927,
+        "t_stat": 2.586431188522034,
+        "p_value": 0.009700483769860524,
+        "ci_low": 0.027500642612209122,
+        "ci_high": 0.19959556081397595,
+        "observations": 178147,
+        "clusters": 47745,
+        "fixed_effect_cells": 310
+      },
+      "importer_entry_model": {
+        "estimate": 0.0018710387867747096,
+        "std_error": 0.01694289427137227,
+        "t_stat": 0.11043206413299345,
+        "p_value": 0.9120670910493551,
+        "ci_low": -0.03133708745037279,
+        "ci_high": 0.0350791650239222,
+        "observations": 247096,
+        "clusters": 60564,
+        "fixed_effect_cells": 507
+      },
+      "effect_of_10pp_import_share_increase": 0.012176588123661363,
+      "plant_years": 849971,
+      "analysis_years": [
+        1998,
+        2017
+      ],
+      "importing_plant_years": 131101,
+      "importing_plant_year_share": 0.15424173295324192,
+      "median_import_share_among_importers": 0.16345449407540485,
+      "result": "descriptive_no_support",
+      "interpretation": "The lagged first-difference design removes time-invariant plant differences and same-year denominator mechanics, but import choice remains endogenous and the association is not causal evidence of supplier destruction."
+    },
+    "hysteresis_diagnostic": {
+      "hypothesis": "Large indigenous-input breadth losses may persist rather than reverse quickly.",
+      "event_definition": "A fall of at least two major indigenous input codes with two subsequent consecutive observations available inside the same ASI input-schedule regime.",
+      "events": 12059,
+      "recovered_within_one_year_share": 0.22539182353428974,
+      "recovered_within_two_years_share": 0.3299610249606103,
+      "not_recovered_within_two_years_share": 0.6700389750393897,
+      "threshold_sensitivity": [
+        {
+          "breadth_loss_threshold": 1,
+          "events": 28323,
+          "recovered_within_one_year_share": 0.3029693182219398,
+          "recovered_within_two_years_share": 0.42075345125869434,
+          "not_recovered_within_two_years_share": 0.5792465487413057
+        },
+        {
+          "breadth_loss_threshold": 2,
+          "events": 12059,
+          "recovered_within_one_year_share": 0.22539182353428974,
+          "recovered_within_two_years_share": 0.3299610249606103,
+          "not_recovered_within_two_years_share": 0.6700389750393897
+        },
+        {
+          "breadth_loss_threshold": 3,
+          "events": 6142,
+          "recovered_within_one_year_share": 0.18756105503093454,
+          "recovered_within_two_years_share": 0.2847606642787366,
+          "not_recovered_within_two_years_share": 0.7152393357212634
+        }
+      ],
+      "result": "plant_level_persistence_diagnostic",
+      "interpretation": "This is a plant-level persistence diagnostic, not the thesis's regional supplier-ecosystem hysteresis test; sampling, reporting changes, and ID gaps remain threats."
+    }
+  },
+  "quality": {
+    "source_files_used": 100,
+    "source_bytes_used": 1504180730,
+    "nonpositive_weights": 160,
+    "missing_weights": 0,
+    "domestic_total_consistency_rate": 0.9995503393306221,
+    "import_total_consistency_rate": 0.9853937897336206,
+    "initial_year_conflicts": 7,
+    "employment_conflicts": 2,
+    "domestic_total_conflicts": 10,
+    "import_total_conflicts": 10,
+    "weights_used_in_estimation": false,
+    "input_schedule_regime_restriction": true,
+    "plant_identifiers_exported": false
+  }
+}
